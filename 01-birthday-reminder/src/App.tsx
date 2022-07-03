@@ -1,6 +1,28 @@
+import { useState } from 'react';
+
+import { Card } from './components/Card';
+import { data } from './data';
+
 function App() {
-	console.log('hello');
-	return <div className='App'>my app</div>;
+	const [people, setPeople] = useState(data);
+
+	const clearPeople = () => {
+		setPeople([]);
+	};
+
+	const getAllPeople = () => {
+		setPeople(data);
+	};
+
+	return (
+		<main className='container'>
+			<Card
+				people={people}
+				clearPeople={clearPeople}
+				getAllPeople={getAllPeople}
+			/>
+		</main>
+	);
 }
 
 export default App;
