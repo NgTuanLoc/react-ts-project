@@ -39,7 +39,6 @@ html {
 
 body {
 	line-height: 1.5;
-	font-size: 0.625;
 	background: var(--clr-background);
 	font-size: 2rem;
 }
@@ -62,7 +61,7 @@ h4 {
 
 /* Layout */
 .container {
-	height: 100vh;
+	min-height: 100vh;
 	display: flex;
 	justify-content: center;
 	align-items: center;

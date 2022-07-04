@@ -44,6 +44,7 @@ const Wrapper = styled.section`
 	box-shadow: var(--dark-shadow);
 	display: flex;
 	flex-direction: column;
+	margin: 3rem auto;
 
 	button {
 		background-color: var(--clr-background);
