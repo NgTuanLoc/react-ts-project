@@ -1,13 +1,58 @@
+:root {
+	--transition: all 0.5s linear;
+	--clr-primary: hsl(36, 47%, 57%);
+	--clr-background: hsl(206, 33%, 96%);
+	--clr-white: white;
+	--clr-btn: #eae6eb;
+	--clr-text: #617d98;
+	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	--fixed-width: 800px;
+	--max-width: 1170px;
+	--spacing: 0.1rem;
+	--radius: 0.5rem;
+}
+
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	background-color: var(--clr-background);
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+/* Global */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	overflow-x: hidden;
+}
+
+html {
+	font-size: 62.5%; /* 1rem = 10px */
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+	letter-spacing: var(--spacing);
+	text-transform: capitalize;
+	margin-bottom: 1rem;
+}
+
+p {
+	font-size: 1.8rem;
+	color: var(--clr-text);
 }
