@@ -24,7 +24,7 @@ code {
 	--light-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
 	--max-width: 1170px;
-	--fixed-width: 820px;
+	--fixed-width: 720px;
 	--transition: all 0.5s linear;
 }
 

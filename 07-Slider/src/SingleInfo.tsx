@@ -7,31 +7,57 @@ interface ISingleInfo {
 	name: string;
 	title: string;
 	quote: string;
+	position: string;
 }
 
-const SingleInfo = ({ image, name, title, quote }: ISingleInfo) => {
+const SingleInfo = ({ image, name, title, quote, position }: ISingleInfo) => {
 	return (
 		<Wrapper>
-			<div className='info'>
-				<img src={image} alt={name} />
-				<h3>{name}</h3>
-				<h4>{title}</h4>
-				<p>{quote}</p>
-			</div>
+			<article className={position}>
+				<div className='info'>
+					<img src={image} alt={name} />
+					<h3>{name}</h3>
+					<h4>{title}</h4>
+					<p>{quote}</p>
+				</div>
 
-			<Icon>
-				<FaQuoteRight />
-			</Icon>
+				<Icon>
+					<FaQuoteRight />
+				</Icon>
+			</article>
 		</Wrapper>
 	);
 };
 
 const Wrapper = styled.div`
 	display: flex;
+	position: absolute;
+	width: 87%;
+	height: 100%;
+	top: 0;
+	left: 0;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	max-width: var(--fixed-width);
+	margin: 0 5rem;
+
+	article {
+		width: 50%;
+		height: 100%;
+		transition: var(--transition);
+		opacity: 0;
+	}
+
+	article.active {
+		opacity: 1;
+		transform: translateX(0);
+	}
+	article.pre {
+		transform: translateX(50%);
+	}
+	article.next {
+		transform: translateX(-50%);
+	}
 
 	.info {
 		display: flex;
@@ -65,6 +91,8 @@ const Icon = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin-inline: auto;
+	width: 10rem;
 	padding: 1rem;
 	font-size: 2rem;
 	color: white;

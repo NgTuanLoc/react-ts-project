@@ -10,21 +10,39 @@ function App() {
 	const [index, preIndex, nextIndex, setMyIndex] = useIndex(0, data.length - 1);
 
 	useEffect(() => {
-		console.log(index);
-	}, [index]);
+		setInterval(() => {
+			setMyIndex(index + 1);
+		}, 3000);
+	});
 
 	return (
 		<Wrapper>
 			<h1>Reviews</h1>
 			<Container>
 				<Icon
+					className='pre'
 					onClick={() => {
 						setMyIndex(index - 1);
 					}}>
 					<FiChevronLeft />
 				</Icon>
-				<SingleInfo {...data[index - 1]} />
+				{data.map((person, id) => {
+					let position = '';
+					if (id === index) {
+						position = 'active';
+					}
+					if (id === preIndex) {
+						position = 'pre';
+					}
+					if (id === nextIndex) {
+						position = 'next';
+					}
+
+					return <SingleInfo position={position} {...person} />;
+				})}
+
 				<Icon
+					className='next'
 					onClick={() => {
 						setMyIndex(index + 1);
 					}}>
@@ -48,11 +66,29 @@ const Container = styled.div`
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	position: relative;
 	padding: 0 4rem;
+	width: 80vw;
+	/* have to have a height */
+	height: 450px;
+	max-width: 800px;
+
+	overflow: hidden;
+
+	.pre {
+		left: 0;
+	}
+	.next {
+		right: 0;
+	}
 `;
 
 const Icon = styled.div`
 	display: flex;
+	z-index: 1000;
+	position: absolute;
+	top: 200px;
+	transform: translateY(-50%);
 	justify-content: center;
 	align-items: center;
 	padding: 1rem;
