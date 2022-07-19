@@ -12,14 +12,14 @@ function App() {
 	const [primaryColors, setPrimaryColors] = useState<HSL[]>(
 		generateColorPalette(value)
 	);
-	const [secondaryColors, setsecondaryColors] = useState<HSL[]>(
+	const [secondaryColors, setSecondaryColors] = useState<HSL[]>(
 		generateColorPalette(value)
 	);
 
 	useEffect(() => {
 		setPrimaryColors(generateColorPalette(value));
-		setPrimaryColors(generateColorPalette(value));
-	}, [value]);
+		setSecondaryColors(generateColorPalette(value, addedHue));
+	}, [value, addedHue]);
 
 	return (
 		<Container>
@@ -39,8 +39,15 @@ function App() {
 				/>
 				<button>Generate</button>
 			</InputContainer>
+			<h1>Primary Colors</h1>
 			<ColorContainer>
 				{primaryColors.map((color, id) => (
+					<SingleColor key={id} color={color} />
+				))}
+			</ColorContainer>
+			<h1>Secondary Colors</h1>
+			<ColorContainer>
+				{secondaryColors.map((color, id) => (
 					<SingleColor key={id} color={color} />
 				))}
 			</ColorContainer>
@@ -97,7 +104,7 @@ const ColorContainer = styled.div`
 	width: 100%;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(223.33px, 1fr));
-	grid-template-rows: repeat(auto-fit, minmax(96px, 1fr));
+	/* grid-template-rows: repeat(auto-fit, minmax(96px, 1fr)); */
 `;
 
 export default App;
