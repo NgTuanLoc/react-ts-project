@@ -59,7 +59,7 @@ const Container = styled.div`
 	}
 
 	@media only screen and (min-width: 800px) {
-		height: auto;
+		height: auto !important;
 
 		ul {
 			display: flex;
