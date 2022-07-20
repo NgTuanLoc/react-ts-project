@@ -6,7 +6,7 @@ import Modal from './components/Modal';
 import Sidebar from './components/Sidebar';
 
 const App = () => {
-	const { toggleSidebar, isSidebarOpen } = useGlobalContext();
+	const { toggleSidebar, showModal } = useGlobalContext();
 
 	return (
 		<Container>
@@ -15,7 +15,9 @@ const App = () => {
 			</MenuButton>
 			<Sidebar />
 
-			<button className='show-modal-btn'>Show Modal</button>
+			<button className='show-modal-btn' onClick={showModal}>
+				Show Modal
+			</button>
 			<Modal />
 		</Container>
 	);

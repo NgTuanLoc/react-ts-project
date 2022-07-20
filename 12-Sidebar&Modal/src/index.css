@@ -95,3 +95,7 @@ h1 {
 .show-sidebar {
 	transform: translateX(0);
 }
+.show-modal {
+	visibility: visible !important;
+	z-index: 100;
+}

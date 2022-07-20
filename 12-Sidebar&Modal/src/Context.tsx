@@ -6,20 +6,38 @@ interface Props {
 
 interface IAppContext {
 	isSidebarOpen: boolean;
+	isModalOpen: boolean;
 	toggleSidebar: () => void;
+	showModal: () => void;
+	hideModal: () => void;
 }
 
 const AppContext = createContext<Partial<IAppContext>>({});
 
 const AppProvider = ({ children }: Props) => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+	const [isModalOpen, setIsModalOpen] = useState(true);
 
 	const toggleSidebar = () => {
 		setIsSidebarOpen(!isSidebarOpen);
 	};
 
+	const showModal = () => {
+		setIsModalOpen(true);
+	};
+	const hideModal = () => {
+		setIsModalOpen(false);
+	};
+
 	return (
-		<AppContext.Provider value={{ isSidebarOpen, toggleSidebar }}>
+		<AppContext.Provider
+			value={{
+				isSidebarOpen,
+				toggleSidebar,
+				isModalOpen,
+				showModal,
+				hideModal,
+			}}>
 			{children}
 		</AppContext.Provider>
 	);
