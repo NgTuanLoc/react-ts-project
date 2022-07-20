@@ -44,10 +44,6 @@ const Container = styled.div`
 	transition: var(--transition);
 	overflow: hidden;
 
-	li {
-		margin-bottom: 1rem;
-	}
-
 	a {
 		color: black;
 		transition: var(--transition);
