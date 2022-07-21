@@ -34,12 +34,17 @@ const Navbar = () => {
 };
 
 const Container = styled.nav`
-	height: 5rem;
+	height: 7rem;
 	background-color: transparent;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	position: relative;
+	z-index: 1;
+
+	.sign-in-btn {
+		display: none;
+	}
 
 	.nav-center {
 		width: 90vw;
@@ -87,10 +92,11 @@ const Container = styled.nav`
 				height: 100%;
 				background: transparent;
 				border-color: transparent;
-				font-size: 2.5rem;
+				font-size: 2rem;
 				color: white;
 				text-transform: capitalize;
 				letter-spacing: 1px;
+				margin-inline: 0.5rem;
 			}
 		}
 	}

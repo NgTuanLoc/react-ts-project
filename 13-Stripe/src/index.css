@@ -89,10 +89,10 @@ h4 {
 	letter-spacing: var(--spacing);
 	text-transform: capitalize;
 	line-height: 1.25;
-	margin-bottom: 0.75rem;
+	margin-bottom: 2rem;
 }
 h1 {
-	font-size: 3rem;
+	font-size: 5rem;
 }
 h2 {
 	font-size: 2rem;
@@ -104,12 +104,12 @@ h4 {
 	font-size: 0.875rem;
 }
 p {
-	margin-bottom: 1.25rem;
+	margin-bottom: 1.5rem;
 	color: var(--clr-grey-5);
 }
 @media screen and (min-width: 800px) {
 	h1 {
-		font-size: 4rem;
+		font-size: 7rem;
 	}
 	h2 {
 		font-size: 2.5rem;
@@ -120,6 +120,10 @@ p {
 	h4 {
 		font-size: 1rem;
 	}
+
+	p {
+		font-size: 2.5rem;
+	}
 	body {
 		font-size: 1rem;
 	}
@@ -128,6 +132,7 @@ p {
 	h3,
 	h4 {
 		line-height: 1;
+		margin-bottom: 1rem;
 	}
 }
 
