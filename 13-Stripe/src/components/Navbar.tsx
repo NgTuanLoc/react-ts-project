@@ -91,6 +91,10 @@ const Container = styled.nav`
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
+
+		img {
+			cursor: pointer;
+		}
 	}
 
 	.nav-links {

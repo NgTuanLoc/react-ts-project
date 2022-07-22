@@ -32,7 +32,7 @@ const AppContext = createContext<Partial<IAppContext>>({});
 const AppProvider = ({ children }: Props) => {
 	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 	const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
-	const [location, setLocation] = useState<location>({ center: 0, bottom: 0 });
+	const [location, setLocation] = useState<location | undefined>();
 	const [page, setPage] = useState<page>({ page: '', links: [] });
 
 	const showSubMenu = (location: location, page: string) => {

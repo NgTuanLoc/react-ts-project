@@ -10,7 +10,7 @@ const SubMenu = () => {
 	useEffect(() => {
 		const tempSubMenu = containerRef.current;
 		if (!tempSubMenu) return;
-
+		if (!location) return;
 		tempSubMenu.style.left = `${location?.center}px`;
 
 		tempSubMenu.style.top = `${location?.bottom}px`;
@@ -64,15 +64,17 @@ const Container = styled.article`
 
 	.links {
 		display: flex;
-		justify-content: space-evenly;
+		justify-content: flex-start;
 		align-items: center;
 		flex-wrap: wrap;
+		margin-top: 2rem;
 		a {
 			display: flex;
 			align-items: center;
+			margin-inline: 2.5rem;
 			svg {
 				margin-right: 1.5rem;
-				font-size: 3rem;
+				font-size: 2rem;
 			}
 
 			p {
