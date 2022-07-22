@@ -22,7 +22,7 @@ interface Props {
 	children?: ReactNode;
 }
 
-const AppContext = createContext<Partial<IAppContext>>({});
+const AppContext = createContext<IAppContext>(null!);
 
 const AppProvider = ({ children }: Props) => {
 	const [state, dispatch] = useReducer(reducer, initialState);

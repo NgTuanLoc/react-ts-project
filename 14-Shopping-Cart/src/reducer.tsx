@@ -36,7 +36,7 @@ const reducer = (state: IContextProps, action: ACTION_TYPE) => {
 			const newFilteredCart = state.products.filter(
 				(cartItem) => cartItem.id !== action.payload.id
 			);
-			return { ...state, newFilteredCart };
+			return { ...state, products: newFilteredCart };
 		case 'FETCHING_DATA':
 			return { ...state, products: action.payload, isLoading: false };
 
@@ -45,7 +45,7 @@ const reducer = (state: IContextProps, action: ACTION_TYPE) => {
 				(totalItem, currentItem) => {
 					const { amount, price } = currentItem;
 					totalItem.amount += amount;
-					totalItem.price += Number(price);
+					totalItem.price += Number(price) * totalItem.amount;
 					return totalItem;
 				},
 				{ amount: 0, price: 0 }

@@ -1,14 +1,12 @@
 import styled from 'styled-components';
 import { RiArrowUpSLine, RiArrowDownSLine } from 'react-icons/ri';
 
-interface ICartItem {
-	title: string;
-	price: number;
-	img: string;
-	amount: number;
-}
+import { useGlobalContext } from '../context';
+import { Product } from '../typing';
 
-const CartItem = ({ title, price, img, amount }: ICartItem) => {
+const CartItem = ({ id, title, price, img, amount }: Product) => {
+	const { toggleAmount, removeItem } = useGlobalContext();
+
 	return (
 		<Container>
 			<div className='img'>
@@ -17,14 +15,14 @@ const CartItem = ({ title, price, img, amount }: ICartItem) => {
 			<div className='info'>
 				<h4>{title}</h4>
 				<p>${price}</p>
-				<button>remove</button>
+				<button onClick={() => removeItem(id)}>remove</button>
 			</div>
 			<div className='amount'>
-				<button>
+				<button onClick={() => toggleAmount({ type: 'inc', id })}>
 					<RiArrowUpSLine />
 				</button>
 				<h4>{amount}</h4>
-				<button>
+				<button onClick={() => toggleAmount({ type: 'dec', id })}>
 					<RiArrowDownSLine />
 				</button>
 			</div>
@@ -64,8 +62,14 @@ const Container = styled.article`
 		flex-direction: column;
 
 		button {
-			font-size: 4rem;
+			font-size: 3rem;
 			color: var(--clr-primary);
+		}
+	}
+
+	@media only screen and (max-width: 800px) {
+		.img {
+			width: 6rem;
 		}
 	}
 `;

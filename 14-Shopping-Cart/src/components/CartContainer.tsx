@@ -1,23 +1,25 @@
 import styled from 'styled-components';
 
-import { data } from '../data';
+import { useGlobalContext } from '../context';
 import CartItem from './CartItem';
 
 const CartContainer = () => {
+	const { products, totalPrice, clearCart } = useGlobalContext();
+
 	return (
 		<Container>
 			<h1>Your Cart</h1>
 			<div className='cart-container'>
-				{data.map((item) => {
+				{products.map((item) => {
 					return <CartItem key={item.id} {...item} />;
 				})}
 			</div>
 			<div className='total'>
 				<div className='result'>
 					<h4>Total</h4>
-					<h4>$8923</h4>
+					<h4>${totalPrice}</h4>
 				</div>
-				<button>Clear Cart</button>
+				<button onClick={() => clearCart()}>Clear Cart</button>
 			</div>
 		</Container>
 	);
@@ -30,6 +32,7 @@ const Container = styled.section`
 	flex-direction: column;
 	width: 80vw;
 	max-width: var(--max-width);
+	margin-bottom: 2rem;
 
 	.cart-container {
 		width: 100%;
