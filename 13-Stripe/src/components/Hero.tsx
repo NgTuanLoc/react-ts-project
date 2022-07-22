@@ -59,7 +59,7 @@ const Container = styled.section`
 		justify-self: end;
 		display: block;
 		img {
-			width: 25rem;
+			width: 30rem;
 		}
 	}
 

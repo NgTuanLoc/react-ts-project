@@ -13,9 +13,6 @@ const App = () => {
 	);
 };
 
-const Container = styled.main`
-	width: 100%;
-	background-image: url('./images/hero.svg');
-`;
+const Container = styled.main``;
 
 export default App;

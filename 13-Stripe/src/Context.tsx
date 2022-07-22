@@ -1,20 +1,74 @@
-import { createContext, useContext, ReactNode } from 'react';
+import { useState, createContext, useContext, ReactNode } from 'react';
+
+import { data } from './data';
 
 interface Props {
 	children?: ReactNode;
 }
 
+type location = { center: number; bottom: number };
+type link = {
+	label: string;
+	icon: JSX.Element;
+	url: string;
+};
+type page = {
+	page: string;
+	links: link[];
+};
 interface IAppContext {
-	value: number;
+	isSidebarOpen: boolean;
+	closeSidebar: () => void;
+	openSidebar: () => void;
+	isSubMenuOpen: boolean;
+	location: location;
+	page: page;
+	showSubMenu: (location: location, page: string) => void;
+	closeSubMenu: () => void;
 }
 
 const AppContext = createContext<Partial<IAppContext>>({});
 
 const AppProvider = ({ children }: Props) => {
-	const value = 12;
+	const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+	const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
+	const [location, setLocation] = useState<location>({ center: 0, bottom: 0 });
+	const [page, setPage] = useState<page>({ page: '', links: [] });
+
+	const showSubMenu = (location: location, page: string) => {
+		const links = data.find((item) => item.page === page);
+
+		setLocation(location);
+		if (links) {
+			setPage(links);
+		}
+		setIsSubMenuOpen(true);
+	};
+	const closeSubMenu = () => {
+		setIsSubMenuOpen(false);
+	};
+
+	const closeSidebar = () => {
+		setIsSidebarOpen(false);
+	};
+	const openSidebar = () => {
+		setIsSidebarOpen(true);
+	};
 
 	return (
-		<AppContext.Provider value={{ value }}>{children}</AppContext.Provider>
+		<AppContext.Provider
+			value={{
+				isSidebarOpen,
+				closeSidebar,
+				openSidebar,
+				isSubMenuOpen,
+				location,
+				page,
+				showSubMenu,
+				closeSubMenu,
+			}}>
+			{children}
+		</AppContext.Provider>
 	);
 };
 

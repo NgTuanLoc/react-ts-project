@@ -1,30 +1,66 @@
 import styled from 'styled-components';
 import { FaBars } from 'react-icons/fa';
+import { MouseEvent } from 'react';
 
 import logo from '../images/logo.svg';
+import { useGlobalContext } from '../Context';
 
 const Navbar = () => {
+	const { openSidebar, showSubMenu, closeSubMenu } = useGlobalContext();
+
+	const onMouseOverHandler = (e: MouseEvent<HTMLButtonElement>) => {
+		if (!showSubMenu) {
+			return;
+		}
+		const targetButton = e.target as HTMLElement;
+
+		const tempButton = targetButton.getBoundingClientRect();
+		const center = (tempButton.left + tempButton.right) / 2;
+		const bottom = tempButton.bottom - 4;
+		const page = `${targetButton.textContent}`;
+
+		showSubMenu({ center, bottom }, page);
+	};
+
+	const handleSubmenu = (e: MouseEvent<HTMLDivElement>) => {
+		const NavTemp = e.target as HTMLElement;
+		if (!NavTemp.classList.contains('link-btn')) {
+			if (!closeSubMenu) {
+				return;
+			}
+			closeSubMenu();
+		}
+	};
+
 	return (
-		<Container>
+		<Container onMouseOver={handleSubmenu}>
 			<div className='nav-center'>
 				<div className='nav-header'>
 					<img src={logo} alt='logo' />
-					<button className='btn toggle-btn'>
+					<button className='btn toggle-btn' onClick={openSidebar}>
 						<FaBars />
 					</button>
 				</div>
 				<ul className='nav-links'>
 					<li>
-						<button className='link-btn'>Projects</button>
+						<button className='link-btn' onMouseOver={onMouseOverHandler}>
+							projects
+						</button>
 					</li>
 					<li>
-						<button className='link-btn'>Solutions</button>
+						<button className='link-btn' onMouseOver={onMouseOverHandler}>
+							solutions
+						</button>
 					</li>
 					<li>
-						<button className='link-btn'>Developers</button>
+						<button className='link-btn' onMouseOver={onMouseOverHandler}>
+							developers
+						</button>
 					</li>
 					<li>
-						<button className='link-btn'>Company</button>
+						<button className='link-btn' onMouseOver={onMouseOverHandler}>
+							company
+						</button>
 					</li>
 				</ul>
 				<button className='btn sign-in-btn'>Sign In</button>
@@ -97,6 +133,7 @@ const Container = styled.nav`
 				text-transform: capitalize;
 				letter-spacing: 1px;
 				margin-inline: 0.5rem;
+				text-transform: capitalize;
 			}
 		}
 	}
