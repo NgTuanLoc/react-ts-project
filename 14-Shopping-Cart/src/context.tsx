@@ -1,8 +1,22 @@
-import { useState, useContext, createContext, ReactNode } from 'react';
+import {
+	useState,
+	useReducer,
+	useEffect,
+	useContext,
+	createContext,
+	ReactNode,
+} from 'react';
 
-interface IAppContext {
-	isLoading: boolean;
-}
+import { IAppContext, IContextProps } from './typing';
+import reducer from './reducer';
+import axios from 'axios';
+
+const initialState: IContextProps = {
+	isLoading: false,
+	products: [],
+	totalAmount: 0,
+	totalPrice: 0,
+};
 
 interface Props {
 	children?: ReactNode;
@@ -11,9 +25,36 @@ interface Props {
 const AppContext = createContext<Partial<IAppContext>>({});
 
 const AppProvider = ({ children }: Props) => {
-	const [isLoading, setIsLoading] = useState(false);
+	const [state, dispatch] = useReducer(reducer, initialState);
+
+	const clearCart = () => dispatch({ type: 'CLEAR_CART' });
+	const toggleAmount = ({ type, id }: { type: 'inc' | 'dec'; id: string }) => {
+		dispatch({ type: 'TOGGLE_AMOUNT', payload: { id, type } });
+	};
+	const removeItem = (id: string) => {
+		dispatch({ type: 'REMOVE_ITEM', payload: { id } });
+	};
+	const fetchData = async () => {
+		dispatch({ type: 'LOADING' });
+
+		const response = await axios.get(process.env.REACT_APP_DOMAIN as string);
+
+		dispatch({ type: 'FETCHING_DATA', payload: response.data });
+	};
+
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		dispatch({ type: 'GET_TOTAL' });
+	}, [state.products]);
+
 	return (
-		<AppContext.Provider value={{ isLoading }}>{children}</AppContext.Provider>
+		<AppContext.Provider
+			value={{ ...state, clearCart, toggleAmount, removeItem }}>
+			{children}
+		</AppContext.Provider>
 	);
 };
 

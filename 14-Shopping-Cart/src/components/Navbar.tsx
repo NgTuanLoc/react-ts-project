@@ -18,9 +18,12 @@ const Navbar = () => {
 };
 
 const Container = styled.nav`
+	position: fixed;
+	top: 0;
+	left: 0;
 	background-color: var(--clr-primary);
 	width: 100%;
-	height: 9rem;
+	height: 7rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -32,6 +35,7 @@ const Container = styled.nav`
 		width: 70vw;
 		max-width: var(--max-width);
 		h1 {
+			font-size: 3rem;
 			color: white;
 		}
 
