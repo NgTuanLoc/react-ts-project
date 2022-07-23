@@ -1,7 +1,11 @@
 import styled from 'styled-components';
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 
+import { useGlobalContext } from '../context';
+
 const Navbar = () => {
+	const { totalAmount } = useGlobalContext();
+
 	return (
 		<Container>
 			<div className='nav-header'>
@@ -9,7 +13,7 @@ const Navbar = () => {
 				<button>
 					<AiOutlineShoppingCart />
 					<div className='total-amount'>
-						<h5>4</h5>
+						<h5>{totalAmount}</h5>
 					</div>
 				</button>
 			</div>
