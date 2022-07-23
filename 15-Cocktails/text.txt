@@ -1,0 +1,9 @@
+id: "17222"
+image: "https://www.thecocktaildb.com/images/media/drink/2x8thr1504816928.jpg"
+name: "A1"
+glass: "Cocktail glass"
+info: "Alcoholic"
+​​
+​​
+​​
+​​

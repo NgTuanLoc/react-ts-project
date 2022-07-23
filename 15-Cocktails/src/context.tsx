@@ -22,10 +22,14 @@ const AppProvider = ({ children }: Props) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [searchTerm, setSearchTerm] = useState('a');
 
-	const fetchData = async () => {
+	const fetchData = useCallback(async () => {
+		console.log('🚀 ~ file: context.tsx ~ line 26 ~ fetchData ~ useCallback');
+
 		try {
 			setIsLoading(true);
-			const response = await axios.get(`${process.env.REACT_APP_DOMAIN}`);
+			const response = await axios.get(
+				`${process.env.REACT_APP_DOMAIN}${searchTerm}`
+			);
 			const { drinks } = response.data;
 
 			if (drinks) {
@@ -51,14 +55,15 @@ const AppProvider = ({ children }: Props) => {
 			console.log(error);
 			setIsLoading(false);
 		}
-	};
+	}, [searchTerm]);
 
 	useEffect(() => {
 		fetchData();
-	}, []);
+	}, [searchTerm, fetchData]);
 
 	return (
-		<AppContext.Provider value={{ cocktails, isLoading, searchTerm }}>
+		<AppContext.Provider
+			value={{ cocktails, isLoading, searchTerm, setSearchTerm }}>
 			{children}
 		</AppContext.Provider>
 	);

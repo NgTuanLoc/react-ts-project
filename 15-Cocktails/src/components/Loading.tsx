@@ -11,7 +11,7 @@ const Loading = () => {
 
 const Container = styled.div`
 	position: absolute;
-	top: 30%;
+	top: 50%;
 	left: 50%;
 	transform: translateX(-50%);
 `;

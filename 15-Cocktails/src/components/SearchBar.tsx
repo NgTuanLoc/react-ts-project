@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 
+import { useGlobalContext } from '../context';
+
 const SearchBar = () => {
+	const { setSearchTerm } = useGlobalContext();
+
 	return (
 		<Container>
 			<form className='form-search'>
 				<h4>search your favorite cocktail</h4>
-				<input type='text' name='input' id='input' />
+				<input
+					type='text'
+					name='input'
+					id='input'
+					onChange={(e) => setSearchTerm(e.target.value)}
+				/>
 			</form>
 		</Container>
 	);
