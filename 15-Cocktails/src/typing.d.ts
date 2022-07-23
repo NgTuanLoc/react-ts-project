@@ -1,3 +1,17 @@
-interface ICocktail {}
+interface ICocktail {
+	id: string;
+	name: string;
+	image: string;
+	info: string;
+	glass: string;
+}
 
-export { ICocktail };
+interface IAppContextState {
+	cocktails: ICocktail[];
+	isLoading: boolean;
+	searchTerm: string;
+}
+
+interface IAppContext extends IAppContextState {}
+
+export { ICocktail, IAppContextState, IAppContext };

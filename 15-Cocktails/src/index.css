@@ -18,6 +18,7 @@ code {
 	--transition: all 0.5s linear;
 	--clr-background: #f1f5f8;
 	--clr-primary: #476a2e;
+	--clr-primary-light: #d4e6a5;
 	/* dark shades of primary color*/
 	--clr-primary-1: hsl(205, 86%, 17%);
 	--clr-primary-2: hsl(205, 77%, 27%);
@@ -52,7 +53,7 @@ code {
 	--spacing: 0.1rem;
 	--radius: 0.25rem;
 	--light-shadow: 2px 5px 3px 0px rgba(0, 0, 0, 0.5);
-	--dark-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+	--dark-shadow: 4px 10px 5px rgba(0, 0, 0, 0.5);
 	--max-width: 1170px;
 	--fixed-width: 620px;
 }
@@ -93,7 +94,7 @@ h4 {
 	margin-bottom: 2rem;
 }
 h1 {
-	font-size: 3rem;
+	font-size: 3.5rem;
 }
 h2 {
 	font-size: 2.5rem;
