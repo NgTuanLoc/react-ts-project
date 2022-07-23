@@ -8,13 +8,16 @@ const CartContainer = () => {
 
 	return (
 		<Container>
-			<h1>Your Cart</h1>
+			<div className='header'>
+				<h1>Your Cart</h1>
+				{products.length <= 0 ? <h4>Your Cart Is Empty</h4> : ''}
+			</div>
 			<div className='cart-container'>
 				{products.map((item) => {
 					return <CartItem key={item.id} {...item} />;
 				})}
 			</div>
-			<div className='total'>
+			<div className={`total ${products.length <= 0 ? 'display-none' : ''}`}>
 				<div className='result'>
 					<h4>Total</h4>
 					<h4>${totalPrice}</h4>
@@ -26,13 +29,18 @@ const CartContainer = () => {
 };
 
 const Container = styled.section`
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 	width: 80vw;
 	max-width: var(--max-width);
-	margin-bottom: 2rem;
+	margin: 40px auto 0;
+	min-height: calc(100vh - 14rem);
+
+	.header {
+		text-align: center;
+		h4 {
+			color: var(--clr-grey-4);
+			letter-spacing: 3px;
+		}
+	}
 
 	.cart-container {
 		width: 100%;
