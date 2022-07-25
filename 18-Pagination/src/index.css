@@ -17,7 +17,7 @@ code {
 	/* Custom */
 	--transition: all 0.5s linear;
 	--clr-background: #f1f5f8;
-	--clr-primary: #476a2e;
+	--clr-primary: #49a6e9;
 	/* dark shades of primary color*/
 	--clr-primary-1: hsl(205, 86%, 17%);
 	--clr-primary-2: hsl(205, 77%, 27%);
@@ -164,3 +164,10 @@ button {
 }
 
 /* Components */
+.underline {
+	width: 18rem;
+	height: 3px;
+	background-color: var(--clr-primary);
+	margin-inline: auto;
+	margin-bottom: 3rem;
+}
