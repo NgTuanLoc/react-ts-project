@@ -9,8 +9,6 @@ import User from './User';
 
 const App = () => {
 	const { users: arrayOfUsers, isLoading } = useFetch();
-	// const arrayOfUsers = paginate(data, 5);
-	// const isLoading = false;
 
 	const [users, setUsers] = useState<IUser[]>([]);
 	const [page, setPage] = useState(0);
@@ -21,7 +19,7 @@ const App = () => {
 		}
 
 		setUsers(arrayOfUsers[page]);
-	}, [page, isLoading]);
+	}, [page, isLoading, arrayOfUsers]);
 
 	const handlePage = (value: number) => {
 		return (e: any) => setPage(value);
