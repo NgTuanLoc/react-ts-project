@@ -1,10 +1,20 @@
 import styled from 'styled-components';
+import { useProgressiveImage } from './useProgressiveImage';
 import { IPhoto } from './typing';
 
 const Photo = ({ urls, alt_description, likes, user }: IPhoto) => {
+	const [src, { blur }] = useProgressiveImage(urls.small, urls.full);
+
 	return (
 		<Container>
-			<img src={urls.full} alt={alt_description} />
+			<img
+				src={src}
+				style={{
+					filter: blur ? 'blur(20px)' : 'none',
+					transition: blur ? 'none' : 'filter 0.3s ease-out',
+				}}
+				alt={alt_description}
+			/>
 			<div className='author'>
 				<div className='info'>
 					<h3 className='name'>{user.name}</h3>

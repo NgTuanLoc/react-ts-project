@@ -64,7 +64,7 @@ const App = () => {
 
 	useEffect(() => {
 		fetchData();
-	}, [newImages]);
+	}, [page]);
 
 	useEffect(() => {
 		window.addEventListener('scroll', scrollEvent);
