@@ -1,18 +1,21 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+
 import { ISingleMovieInList } from '../typing';
 
 const defaultImage =
 	'https://upload.wikimedia.org/wikipedia/commons/f/fc/No_picture_available.png';
 
-const Movie = ({ Poster, Title, Year }: ISingleMovieInList) => {
-	console.log(Poster);
+const Movie = ({ Poster, Title, Year, imdbID }: ISingleMovieInList) => {
 	return (
 		<Container>
-			<img src={Poster === 'N/A' ? defaultImage : Poster} alt={Title} />
-			<div className='info'>
-				<p>{Title}</p>
-				<p>{Year}</p>
-			</div>
+			<Link to={`/movie/${imdbID}`}>
+				<img src={Poster === 'N/A' ? defaultImage : Poster} alt={Title} />
+				<div className='info'>
+					<p>{Title}</p>
+					<p>{Year}</p>
+				</div>
+			</Link>
 		</Container>
 	);
 };
