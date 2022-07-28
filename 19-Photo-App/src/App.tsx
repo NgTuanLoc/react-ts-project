@@ -12,22 +12,30 @@ const App = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [newImages, setNewImages] = useState(false);
-	const mounted = useRef<any>(null);
+	const [query, setQuery] = useState('');
+	const mounted = useRef<any>(false);
 
 	const fetchData = async () => {
 		setIsLoading(true);
 		const urlPage = `&page=${page}`;
+		const urlQuery = `&query=${query}`;
+		const clientId = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
+		let url = '';
+
+		if (query) {
+			url = `${process.env.REACT_APP_SEARCH_DOMAIN}${clientId}${urlPage}${urlQuery}`;
+		} else {
+			url = `${process.env.REACT_APP_DOMAIN}${clientId}${urlPage}`;
+		}
 
 		try {
-			const clientId = `?client_id=${process.env.REACT_APP_ACCESS_KEY}`;
-
-			const response = await axios.get(
-				`${process.env.REACT_APP_DOMAIN}${clientId}${urlPage}`
-			);
+			const response = await axios.get(url);
 			const data = response.data;
 
-			if (page === 1) {
-				setPhotos(data);
+			if (page === 1 && query) {
+				setPhotos(data.results);
+			} else if (query) {
+				setPhotos([...photos, ...data.results]);
 			} else {
 				setPhotos([...photos, ...data]);
 			}
@@ -41,42 +49,56 @@ const App = () => {
 		}
 	};
 
-	const scrollEvent = () => {
-		if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
-			setNewImages(true);
-			console.log(
-				'🚀 ~ file: App.tsx ~ line 33 ~ scrollEvent ~ setNewImages',
-				newImages
-			);
+	useEffect(() => {
+		if (!mounted.current) {
+			mounted.current = true;
+			return;
 		}
-	};
+		fetchData();
+	}, [page]);
 
 	useEffect(() => {
 		if (!mounted.current) {
 			mounted.current = true;
 			return;
 		}
+
 		if (!newImages) return;
 		if (isLoading) return;
 
 		setPage((oldPage) => oldPage + 1);
 	}, [isLoading, newImages]);
 
-	useEffect(() => {
-		fetchData();
-	}, [page]);
+	const scrollEvent = () => {
+		if (window.innerHeight + window.scrollY >= document.body.scrollHeight - 2) {
+			setNewImages(true);
+		}
+	};
 
 	useEffect(() => {
 		window.addEventListener('scroll', scrollEvent);
 		return () => window.removeEventListener('scroll', scrollEvent);
 	}, []);
 
+	const onSubmitHandler = (e: any) => {
+		e.preventDefault();
+		if (!query) return;
+		if (page === 1) {
+			fetchData();
+		}
+		setPage(1);
+	};
+
 	return (
 		<Container>
 			<section className='search'>
-				<form className='form-container'>
-					<input type='text' placeholder='Search' />
-					<button>
+				<form className='form-container' onSubmit={onSubmitHandler}>
+					<input
+						type='text'
+						placeholder='Search'
+						onChange={(e) => setQuery(e.target.value)}
+					/>
+					<button type='submit'>
 						<FiSearch />
 					</button>
 				</form>
