@@ -1,0 +1,160 @@
+body {
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+		'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+		sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+code {
+	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+		monospace;
+}
+
+/* Global Style */
+:root {
+	--clr-background: #fff;
+	--clr-font: #282c35;
+	--clr-primary: #d23669;
+
+	--radius: 3px;
+	--max-width: 900px;
+}
+
+.dark-theme {
+	--clr-background: #282c35;
+	--clr-font: #fff;
+	--clr-primary: #ffa7c4;
+}
+.light-theme {
+	--clr-background: #fff;
+	--clr-font: #282c35;
+	--clr-primary: #d23669;
+}
+
+html {
+	font-size: 62.5%;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	line-height: 1.5;
+	font-size: 2rem;
+	background-color: var(--clr-background);
+	overflow-x: hidden;
+	transition: all 1s ease-in-out;
+}
+
+/* Typography */
+ul {
+	list-style-type: none;
+}
+a {
+	text-decoration: none;
+}
+h1,
+h2,
+h3,
+h4 {
+	letter-spacing: var(--spacing);
+	text-transform: capitalize;
+	line-height: 1.25;
+	color: var(--clr-primary);
+}
+h1 {
+	font-size: 3rem;
+	color: var(--clr-font);
+}
+h2 {
+	font-size: 2.5rem;
+}
+h3 {
+	font-size: 1.5rem;
+}
+h4 {
+	font-size: 1.5rem;
+}
+p {
+	font-size: 1.5rem;
+	line-height: 2rem;
+	font-weight: 400;
+	letter-spacing: 2px;
+	color: var(--clr-font);
+}
+a {
+	font-size: 2rem;
+	margin-bottom: 1rem;
+	color: var(--clr-grey-5);
+}
+
+span {
+	font-size: 1.4rem;
+	font-style: italic;
+	color: var(--clr-font);
+}
+
+@media screen and (min-width: 800px) {
+	h1 {
+		font-size: 4rem;
+	}
+	h2 {
+		font-size: 3.5rem;
+	}
+	h3 {
+		font-size: 3.25rem;
+	}
+	h4 {
+		font-size: 3rem;
+	}
+
+	p {
+		font-size: 2.8rem;
+	}
+	body {
+		font-size: 1rem;
+	}
+	h1,
+	h2,
+	h3,
+	h4 {
+		line-height: 1;
+		margin-bottom: 1rem;
+	}
+}
+
+button {
+	color: var(--clr-background);
+	font-size: 2rem;
+	background-color: var(--clr-primary);
+	font-weight: bold;
+	border: transparent;
+	border-radius: var(--radius);
+	cursor: pointer;
+	padding: 0.5rem 1rem;
+	text-transform: capitalize;
+	letter-spacing: 3px;
+}
+/*  global classes */
+
+/* section */
+.section {
+	width: 90vw;
+	margin: 0 auto;
+	max-width: var(--max-width);
+}
+
+@media screen and (min-width: 992px) {
+	.section {
+		width: 95vw;
+	}
+}
+
+/* Components */
