@@ -19,6 +19,7 @@ const Container = styled.section`
 	display: grid;
 	grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
 	grid-gap: 2rem;
+	margin-bottom: 5rem;
 `;
 
 export default MovieList;
