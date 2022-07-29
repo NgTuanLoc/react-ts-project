@@ -6,10 +6,10 @@ interface ISingleMovieInList {
 }
 
 interface IMovieInfo {
-	poster: string;
-	title: string;
-	plot: string;
-	year: string;
+	Poster: string;
+	Title: string;
+	Plot: string;
+	Year: string;
 }
 
 interface IError {

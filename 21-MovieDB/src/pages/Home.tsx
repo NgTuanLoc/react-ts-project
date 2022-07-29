@@ -9,7 +9,7 @@ import { getMovieList } from '../features/movieThunk';
 import { MovieList, Loading } from '../components';
 
 const Home = () => {
-	const { isLoading, query } = useAppSelector((store) => store.movie);
+	const { isLoading, query, error } = useAppSelector((store) => store.movie);
 	const dispatch = useAppDispatch();
 
 	useEffect(() => {
@@ -35,6 +35,7 @@ const Home = () => {
 						<IoSearchOutline />
 					</button>
 				</form>
+				{error.show && <h4 className='error'>{error.msg}</h4>}
 			</header>
 			{isLoading ? <Loading /> : <MovieList />}
 		</Container>
@@ -49,6 +50,14 @@ const Container = styled.main`
 	header {
 		margin-top: 2rem;
 		margin-bottom: 4rem;
+
+		.error {
+			font-size: 2rem;
+			font-weight: 300;
+			letter-spacing: var(--spacing);
+			color: red;
+			margin-top: 0.5rem;
+		}
 
 		form {
 			display: flex;
