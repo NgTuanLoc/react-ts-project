@@ -4,13 +4,15 @@ import { useAppDispatch, useAppSelector } from '../app/hooks';
 import { previousPage, nextPage } from '../features/postSlice';
 
 const Pagination = () => {
-	const { page } = useAppSelector((store) => store.post);
+	const { page, nbPages } = useAppSelector((store) => store.post);
 	const dispatch = useAppDispatch();
 
 	return (
 		<Container>
 			<button onClick={() => dispatch(previousPage())}>prev</button>
-			<h4>{page} of 50</h4>
+			<h4>
+				{page + 1} of {nbPages}
+			</h4>
 			<button onClick={() => dispatch(nextPage())}>next</button>
 		</Container>
 	);

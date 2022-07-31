@@ -26,14 +26,19 @@ const postSlice = createSlice({
 	reducers: {
 		previousPage: (state: IState) => {
 			let tempPage = state.page - 1;
-			state.page = tempPage < 0 ? state.nbPages : tempPage;
+			state.page = tempPage < 0 ? state.nbPages - 1 : tempPage;
 		},
 		nextPage: (state: IState) => {
 			let tempPage = state.page + 1;
-			state.page = tempPage > state.nbPages ? 0 : tempPage;
+			state.page = tempPage > state.nbPages - 1 ? 0 : tempPage;
 		},
 		searchPost: (state: IState, action: PayloadAction<string>) => {
 			state.query = action.payload;
+			state.page = 0;
+		},
+		filterPost: (state: IState, action: PayloadAction<string>) => {
+			const deletedPostId = action.payload;
+			state.hits = state.hits.filter((item) => item.objectID !== deletedPostId);
 		},
 	},
 	extraReducers: (builder) => {
@@ -52,6 +57,7 @@ const postSlice = createSlice({
 	},
 });
 
-export const { previousPage, nextPage, searchPost } = postSlice.actions;
+export const { previousPage, nextPage, searchPost, filterPost } =
+	postSlice.actions;
 
 export default postSlice.reducer;
