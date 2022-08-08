@@ -4,12 +4,12 @@ const initialState = {
 	hello: 'hello',
 };
 
-const testSlice = createSlice({
-	name: 'test',
+const quizSlice = createSlice({
+	name: 'quiz',
 	initialState,
 	reducers: {
 		hello: () => {},
 	},
 });
 
-export default testSlice.reducer;
+export default quizSlice.reducer;
