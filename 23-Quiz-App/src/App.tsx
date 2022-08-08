@@ -1,10 +1,19 @@
 import styled from 'styled-components';
-import { Form } from './components';
+
+import { useAppSelector } from './app/hooks';
+import { Form, Modal, Quiz } from './components';
 
 function App() {
+	const { quizList, selectedQuiz, isModalOpen } = useAppSelector(
+		(store) => store.quiz
+	);
+
+	const quizDetail = quizList[selectedQuiz];
+
 	return (
 		<Container className='App'>
-			<Form />
+			{quizList.length === 0 ? <Form /> : <Quiz {...quizDetail} />}
+			{isModalOpen && <Modal />}
 		</Container>
 	);
 }

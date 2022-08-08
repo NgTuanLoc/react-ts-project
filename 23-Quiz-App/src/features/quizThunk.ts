@@ -11,11 +11,11 @@ const quizThunk = createAsyncThunk<IQuestion[], void, { state: RootState }>(
 			const { quiz } = thunkAPI.getState();
 			const { amount, category, difficulty } = quiz.query;
 
-			const response = await axios.get(
-				`${process.env.API_ENDPOINT}amount=${amount}&difficulty=${difficulty}&category=${category}&type=multiple`
+			const response = await axios.get<any>(
+				`${process.env.REACT_APP_API_ENDPOINT}amount=${amount}&difficulty=${difficulty}&category=${category}&type=multiple`
 			);
 
-			return response.data;
+			return response.data.results as IQuestion[];
 		} catch (error) {
 			return thunkAPI.rejectWithValue(error);
 		}
@@ -23,7 +23,3 @@ const quizThunk = createAsyncThunk<IQuestion[], void, { state: RootState }>(
 );
 
 export { quizThunk };
-
-// `${API_ENDPOINT}amount=${amount}&difficulty=${difficulty}&category=${table[category]}&type=multiple`
-
-// https://opentdb.com/api.php?amount=10&category=21&difficulty=easy&type=multiple

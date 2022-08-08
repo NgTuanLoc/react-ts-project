@@ -3,19 +3,14 @@ import { ReactNode } from 'react';
 
 interface IButton {
 	children: ReactNode;
-	color?: string;
-	backgroundColor?: string;
-	width?: string;
+	className?: string;
 	type: 'submit' | 'button';
+	onClickHandler?: any;
 }
 
-const Button = ({ children, color, backgroundColor, width, type }: IButton) => {
+const Button = ({ children, className, type, onClickHandler }: IButton) => {
 	return (
-		<Container
-			type={type}
-			backgroundColor={backgroundColor}
-			color={color}
-			width={width}>
+		<Container className={className} onClick={onClickHandler} type={type}>
 			{children}
 		</Container>
 	);
@@ -29,13 +24,8 @@ interface Props {
 }
 
 const Container = styled.button<Props>`
-	color: ${(props) => (props.color ? props.color : 'black')};
-	background-color: ${(props) =>
-		props.backgroundColor ? props.backgroundColor : 'var(--clr-secondary)'};
-	width: ${(props) => (props.width ? props.width : '100%')};
-	padding: 1rem 2rem;
-	border-radius: var(--radius);
 	border: transparent;
+	transition: var(--transition);
 	cursor: pointer;
 `;
 

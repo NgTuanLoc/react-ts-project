@@ -1,16 +1,30 @@
 import { useForm } from 'react-hook-form';
 import styled from 'styled-components';
 
+import { quizThunk } from '../features/quizThunk';
+import { queryQuizForm, table } from '../features/quizSlice';
+import { useAppDispatch, useAppSelector } from '../app/hooks';
 import Button from './Button';
+import Loading from './Loading';
+import { IApiEndpoint } from '../typing';
 
 const Form = () => {
 	const {
 		register,
 		handleSubmit,
 		formState: { errors },
-	} = useForm();
-	const onSubmit = (data: any) => console.log(data);
-	console.log(errors);
+	} = useForm<IApiEndpoint>();
+	const dispatch = useAppDispatch();
+	const { isLoading } = useAppSelector((store) => store.quiz);
+
+	const onSubmit = (data: IApiEndpoint) => {
+		dispatch(queryQuizForm(data));
+		dispatch(quizThunk());
+	};
+
+	if (isLoading) {
+		return <Loading />;
+	}
 
 	return (
 		<Container onSubmit={handleSubmit(onSubmit)}>
@@ -23,15 +37,16 @@ const Form = () => {
 					type='number'
 					placeholder='amount'
 					{...register('amount', { required: true, max: 50, min: 0 })}
+					defaultValue={10}
 				/>
 			</div>
 
 			<div className='form-control'>
 				<label htmlFor='category'>Category</label>
 				<select id='category' {...register('category', { required: true })}>
-					<option value='sports'>sports</option>
-					<option value='history'>history</option>
-					<option value='politics'>politics</option>
+					<option value={table['sports']}>sports</option>
+					<option value={table['history']}>history</option>
+					<option value={table['politics']}>politics</option>
 				</select>
 			</div>
 
@@ -44,12 +59,15 @@ const Form = () => {
 				</select>
 			</div>
 
-			<Button type='submit'>Submit</Button>
+			<Button className='btn-quiz' type='submit'>
+				Submit
+			</Button>
 		</Container>
 	);
 };
 
 const Container = styled.form`
+	position: relative;
 	background-color: white;
 	border-radius: var(--radius);
 	padding: 2rem;
@@ -75,6 +93,10 @@ const Container = styled.form`
 			border-radius: var(--radius);
 			border: transparent;
 		}
+	}
+
+	h4 {
+		margin: 0;
 	}
 `;
 
