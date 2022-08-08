@@ -32,7 +32,7 @@ const Container = styled.button<Props>`
 	color: ${(props) => (props.color ? props.color : 'black')};
 	background-color: ${(props) =>
 		props.backgroundColor ? props.backgroundColor : 'var(--clr-secondary)'};
-	width: ${(props) => (props.width ? props.width : '20rem')};
+	width: ${(props) => (props.width ? props.width : '100%')};
 	padding: 1rem 2rem;
 	border-radius: var(--radius);
 	border: transparent;

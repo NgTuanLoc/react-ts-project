@@ -53,6 +53,7 @@ const Container = styled.form`
 	background-color: white;
 	border-radius: var(--radius);
 	padding: 2rem;
+	box-shadow: var(--dark-shadow);
 
 	.form-control {
 		display: flex;
