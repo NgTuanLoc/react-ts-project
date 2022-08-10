@@ -8,7 +8,7 @@ import { nextQuiz, openModal, checkAnswer } from '../features/quizSlice';
 import Button from './Button';
 
 const Quiz = ({ question, correct_answer, incorrect_answers }: IQuestion) => {
-	const { selectedQuiz, quizList, correctAnswer } = useAppSelector(
+	const { quizList, correctAnswer, completedQuiz } = useAppSelector(
 		(store) => store.quiz
 	);
 	const answers = [...incorrect_answers, correct_answer];
@@ -20,17 +20,15 @@ const Quiz = ({ question, correct_answer, incorrect_answers }: IQuestion) => {
 	};
 
 	useEffect(() => {
-		if (selectedQuiz === quizList.length - 1) {
-			dispatch(openModal());
-		}
-	}, [selectedQuiz]);
+		if (completedQuiz) dispatch(openModal());
+	}, [completedQuiz]);
 
 	return (
 		<Container>
 			<h5 className='result'>
 				Correct answer {correctAnswer}/{quizList.length}
 			</h5>
-			<h4>{question}</h4>
+			<h4 dangerouslySetInnerHTML={{ __html: question }} />
 			<div className='container'>
 				{answers.map((answer, id) => {
 					return (

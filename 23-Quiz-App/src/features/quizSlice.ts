@@ -17,6 +17,7 @@ interface IState {
 	selectedQuiz: number;
 	isModalOpen: boolean;
 	correctAnswer: number;
+	completedQuiz: boolean;
 }
 
 const initialState: IState = {
@@ -26,6 +27,7 @@ const initialState: IState = {
 	quizList: [],
 	selectedQuiz: 0,
 	isModalOpen: false,
+	completedQuiz: false,
 	query: {
 		amount: 10,
 		category: table['sports'],
@@ -43,13 +45,22 @@ const quizSlice = createSlice({
 			state.query = { amount: Number(amount), category, difficulty };
 		},
 		nextQuiz: (state: IState) => {
-			state.selectedQuiz = state.selectedQuiz + 1;
+			const lastSelectedQuiz = state.quizList.length - 1;
+			const nextSelectedQuiz = state.selectedQuiz + 1;
+
+			if (nextSelectedQuiz >= state.quizList.length) {
+				state.selectedQuiz = lastSelectedQuiz;
+				state.completedQuiz = true;
+			} else {
+				state.selectedQuiz = nextSelectedQuiz;
+			}
 		},
 		openModal: (state: IState) => {
 			state.isModalOpen = true;
 		},
 		closeModal: (state: IState) => {
 			state.isModalOpen = false;
+			state.completedQuiz = false;
 			state.quizList = [];
 			state.selectedQuiz = 0;
 			state.correctAnswer = 0;
