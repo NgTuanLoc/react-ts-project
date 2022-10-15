@@ -20,7 +20,7 @@ function App() {
 
 const Wrapper = styled.main`
 	width: 80vw;
-	min-width: var(--fixex-width);
+	min-width: var(--fixed-width);
 	margin: 5rem auto;
 	background-color: var(--clr-white);
 	padding: 3rem;
